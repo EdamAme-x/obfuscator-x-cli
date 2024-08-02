@@ -188,6 +188,10 @@ export class Obfuscate {
             unicodeEscapeSequence: true
           }).getObfuscatedCode();
 
+        logger.setDepth(2).log("Inject anti deobfuscation");
+
+        script = script.replace(/'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\+\/='/g, "atob('YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWjAxMjM0NTY3ODkrLz0'+String.fromCharCode(61))")
+
         logger.setDepth(2).log("Finished obfuscating");
 
         logger.setDepth(0);
