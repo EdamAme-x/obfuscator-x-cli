@@ -2,7 +2,14 @@
 	"tasks": {
 		"dev": "deno run --watch -A main.ts"
 	},
-	"imports": { "@std/path": "jsr:@std/path@^1.0.2", "@ryu/enogu": "jsr:@ryu/enogu@^0.4.1" },
+	"imports": {
+		"@babel/parser": "npm:@babel/parser@^7.25.3",
+		"@babel/traverse": "npm:@babel/traverse@^7.25.3",
+		"@ryu/enogu": "jsr:@ryu/enogu@^0.4.1",
+		"@std/assert": "jsr:@std/assert@^1.0.1",
+		"@std/path": "jsr:@std/path@^1.0.2",
+		"javascript-obfuscator": "npm:javascript-obfuscator@^4.1.1"
+	},
 	"fmt": {
 		"useTabs": true,
 		"singleQuote": false,

@@ -1,4 +1,4 @@
-import { createVarName } from "./create-var-name.ts";
+import { CreateVarName } from "./create-var-name.ts";
 
 const stringMap = new Map(Object.entries({
 	"a": "Array.toString()[12]",
@@ -7,7 +7,7 @@ const stringMap = new Map(Object.entries({
 	"d": "Object.bind.toString()[12]",
 	"e": "[''].pop().concat(Object.toString()[12])",
 	"f": "(([]+Object)[0]+[1]).substr(0,1)",
-	"g": "String.fromCharCode((Object.toString().shift()).charCodeAt()+1)",
+	"g": "String.fromCharCode(((([]+Object)[0]+[1]).substr(0,1)).charCodeAt()+1)",
 	"h": "String.fromCharCode((Object.toString()[0]).charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call())",
 	"i": "['e','d','a','m','a','m','e','x'].toString.toString()[14]",
 	"j": "String.fromCharCode(((0+[]).toString.toString()[14]).charCodeAt()+1)",
@@ -25,11 +25,11 @@ const stringMap = new Map(Object.entries({
 	"v": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call())",
 	"w": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call()+[1][0])",
 	"x": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call()+[2,1].length)",
-	"y": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call()+[String.constructor('retur' + String.bind.toString()[11]+ ' ' +atob('Mw==')),1][0])",
-	"z": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call()+[2,String.constructor('retur' + String.bind.toString()[11]+ ' ' +atob('Mg=='))].reduce((a,b)=>b+a,0))",
+	"y": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call()+[String.constructor('retur' + String.bind.toString()[11]+ ' ' +atob('Mw==')),1][0]())",
+	"z": "String.fromCharCode(String.toString.toString()[12].charCodeAt()+String.constructor('r'+Object.toString()[12]+'tur'+String.bind.toString()[11]+' '+atob('Mg==')).call()+[2,String.constructor('retur' + String.bind.toString()[11]+ ' ' +atob('Mg=='))()].reduce((a,b)=>b+a,0))",
 }));
 
-function getString(string: string) {
+export function getString(string: string) {
 	if (stringMap.has(string)) {
 		return stringMap.get(string);
 	} else if (stringMap.has(string.toLowerCase())) {
@@ -52,10 +52,10 @@ function obfuscateVariableName(variableName: string) {
 }
 
 export class GlobalVariables {
-	createdGlobalVariables: Map<string, string> = new Map();
+	public createdGlobalVariables: Map<string, string> = new Map();
 
 	constructor(
-		private createVarName: createVarName,
+		private createVarName: CreateVarName,
 	) {}
 
 	public createGlobalVariables(
@@ -66,6 +66,6 @@ export class GlobalVariables {
 
 		this.createdGlobalVariables.set(variableName, generatedVariableName);
 
-		return `;${generatedVariableName}=${ObfuscatedVariableName};`;
+		return `;globalThis.${generatedVariableName}=${ObfuscatedVariableName};`;
 	}
 }

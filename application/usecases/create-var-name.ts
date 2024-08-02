@@ -1,6 +1,6 @@
 import { Logger } from "../../infrastructure/drivers/logger.ts";
 
-export class createVarName {
+export class CreateVarName {
 	private prefix: string = "";
 
 	constructor(
