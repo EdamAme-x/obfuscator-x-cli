@@ -1,0 +1,14 @@
+{
+	"tasks": {
+		"dev": "deno run --watch -A main.ts"
+	},
+	"imports": { "@std/path": "jsr:@std/path@^1.0.2", "@ryu/enogu": "jsr:@ryu/enogu@^0.4.1" },
+	"fmt": {
+		"useTabs": true,
+		"singleQuote": false,
+		"semiColons": true,
+		"proseWrap": "preserve",
+		"lineWidth": 120,
+		"indentWidth": 4
+	}
+}
