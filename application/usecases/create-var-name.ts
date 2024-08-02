@@ -3,9 +3,7 @@ import { Logger } from "../../infrastructure/drivers/logger.ts";
 export class CreateVarName {
 	private prefix: string = "";
 
-	constructor(
-		private logger: Logger,
-	) {}
+	constructor() {}
 
 	public setPrefix(prefix: string) {
 		this.prefix = prefix;

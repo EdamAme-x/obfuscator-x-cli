@@ -32,7 +32,7 @@ export class Obfuscate {
         logger.log("Obfuscating script");
 
         logger.setDepth(1).log("Initializing create variables");
-		const createVarName = new CreateVarName(logger);
+		const createVarName = new CreateVarName();
         logger.setDepth(2).log("Initialized create variables");
 
         logger.setDepth(1).log("Initializing global variables");
@@ -44,7 +44,7 @@ export class Obfuscate {
         const trueKeyName = "$x_" + crypto.randomUUID().replace(/-/g, "");
         const falseKeyName = "$x_" + crypto.randomUUID().replace(/-/g, "");
 
-        script = `;${symbolKeyName}=Symbol();${symbolKeyName + "_map"}={[${symbolKeyName}]:{"${trueKeyName}":(_x)=>(((new Date())*1)>_x),"${falseKeyName}":(_x)=>(((new Date())*1)>(-1*_x))}};${script}`
+        script = `;globalThis.${symbolKeyName}=Symbol();globalThis.${symbolKeyName + "_map"}={[globalThis.${symbolKeyName}]:{"${trueKeyName}":(_x)=>(((new Date())*1)>_x),"${falseKeyName}":(_x)=>(((new Date())*1)>(-1*_x))}};${script}`
         logger.setDepth(2).log("Injected anti boolean tracker");
 
         logger.setDepth(1).log("Searching global variables");
@@ -139,12 +139,11 @@ export class Obfuscate {
             debugProtectionInterval: 5,
             disableConsoleOutput: false,
             domainLock: [],
-            domainLockRedirectUrl: 'about:blank',
             forceTransformStrings: [],
             identifierNamesCache: null,
             identifierNamesGenerator: 'mangled-shuffled',
             identifiersDictionary: [],
-            identifiersPrefix: 'x$',
+            identifiersPrefix: '$x',
             ignoreImports: false,
             inputFileName: '',
             log: false,
